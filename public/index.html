@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stimulus Playground</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module">
+        import { Application, Controller } from "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+        window.Stimulus = Application.start()
+
+        Stimulus.register("hello", class extends Controller {
+            static targets = ["name"]
+
+            connect() {
+                console.log("Hello, Stimulus!", this.element)
+            }
+            greet() {
+                const element = this.nameTarget
+                const name = element.value
+                console.log(`Hello, ${name}!`)
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <h1>Stimulus Playground</h1>
+    <div data-controller="hello">
+        <input data-hello-target="name" type="text">
+        <button data-action="click->hello#greet">Greet</button>
+    </div>
+</body>
+
+</html>
